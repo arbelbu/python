@@ -12,6 +12,6 @@ def arbel():
 B = Button(tk, text ="Hello", command = arbel)
 B.pack()
 c.pack()
-
+pass
 tk.mainloop()
 pass  
