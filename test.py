@@ -1,15 +1,19 @@
-from tkinter import *
+import tkinter as tk
 import time
-import tkinter
-tk = Tk()
-c= Canvas(tk,height=100,width=100)
+
+
+win = tk.Tk()
+c= tk.Canvas(win,height=100,width=100)
 
 start =(50,50)
 
 def arbel():
-   c.create_text(50,50,text="Hello arbel")
+   B = tk.Button(win, text ="Hello arbel", command = arbel)
+   B.pack()
 
-B = Button(tk, text ="Hello", command = arbel)
+   #c.create_text(50,50,text="Hello arbel")
+
+B = tk.Button(win, text ="Hello", command = arbel)
 B.pack()
 c.pack()
 pass
