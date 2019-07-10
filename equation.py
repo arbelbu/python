@@ -45,18 +45,16 @@ assert(one_side("5x--5=10")=="5x--5-10")
 assert(one_side("12x+4x=-43+5x")=="12x+4x+43-5x")
 
 def do_x (q):
-    imp = []
     q=q.replace("+","@+")
     q=q.replace("-","@-")
     trck=q.split("@")
     if '' in trck:
-        trck=trck.remove ('')
-    imp+=trck
-    return imp
+        trck.remove ('')
+    return trck
 
 assert(do_x("12x+4x-43+5x")==['12x','+4x','-43','+5x'])
-assert(do_x('+3+3x')==['+3','+3'])
-pass
+assert(do_x('+3+3x')==['+3','+3x'])
+
 def mehber (imp):
     rx = []
     r = []
