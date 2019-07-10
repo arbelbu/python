@@ -112,11 +112,13 @@ c= tk.Canvas(win,height=200,width=200)
 c.create_text(100,50,text="Give the equation")
 
 E = tk.Entry(win)
-
+id = 5000
 def graft():    
     mish=E.get()
     stri=str(liftor(mish))
-    c.create_text(150,100,text=('x=',stri))
+    
+    c.delete("tag_")
+    c.create_text(100,100,text=('x=',stri),tag="tag_")
 
 B= tk.Button(win,text='solve', command = graft)
 
