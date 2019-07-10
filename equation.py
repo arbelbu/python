@@ -1,3 +1,5 @@
+import tkinter as tk
+
 # split the equation to two parts
 # e.g. split("3x+4=5") is ("3x+4","5")
 def split(mish):
@@ -99,7 +101,27 @@ assert(liftor("-22x=44")==-2)
 assert(liftor("-22x=-44")==2)
 assert(liftor('x=6')==6)
 assert(liftor('-6=-x')==6)
-while True :
-    mish =input("Give the equation \n")
-    print("x=",liftor(mish))
 
+#while True :
+#    mish =input("Give the equation \n")
+#    print("x=",liftor(mish))
+
+
+win = tk.Tk()
+c= tk.Canvas(win,height=200,width=200)
+c.create_text(100,50,text="Give the equation")
+
+E = tk.Entry(win)
+
+def graft():    
+    mish=E.get()
+    stri=str(liftor(mish))
+    c.create_text(150,100,text=('x=',stri))
+
+B= tk.Button(win,text='solve', command = graft)
+
+E.pack()
+c.pack()
+B.pack()
+
+tk.mainloop()
