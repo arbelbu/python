@@ -72,6 +72,8 @@ def schoom (nosaf):
     i=0
     for s in nosaf :
         s = s.replace('x', '')
+        if s=='' or s=='-' or s=='+':
+            s+='1'
         i+=int(s)
     return i
 
@@ -93,6 +95,11 @@ def liftor(mish):
  
 assert(liftor("3x+3=-3-3x") == -1.0)
 assert(liftor("22x=44")==2)
+assert(liftor("-22x=44")==-2)
+assert(liftor("-22x=-44")==2)
+assert(liftor('x=6')==6)
+assert(liftor('-6=-x')==6)
 while True :
     mish =input("Give the equation \n")
     print("x=",liftor(mish))
+
