@@ -81,18 +81,18 @@ assert(schoom(['12x','+x6','-4','+4x','+2'])==20)
 
 
 def liftor(mish):
-   
-    return r
+    l,r=split(mish)
+    r=negate(r)
+    l=do_x(l)
+    r=do_x(r)
+    meaohd=l+r
+    x,nox=mehber(meaohd)
+    x=schoom (x)
+    nox=schoom (nox)
+    return nox/-x
  
-mish = "3x+3=-3-3x"
-l,r=split(mish)
-r=negate(r)
-l=do_x(l)
-r=do_x(r)
-meaohd=l+r
-x,nox=mehber(meaohd)
-x=schoom (x)
-nox=schoom (nox)
-pass
-#mesh =input("Give the equation")
-#print("x=",liftor(mish))
+assert(liftor("3x+3=-3-3x") == -1.0)
+assert(liftor("22x=44")==2)
+while True :
+    mish =input("Give the equation \n")
+    print("x=",liftor(mish))
