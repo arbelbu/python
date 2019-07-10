@@ -76,7 +76,7 @@ def schoom (nosaf):
         s = s.replace('x', '')
         if s=='' or s=='-' or s=='+':
             s+='1'
-        i+=int(s)
+        i+=float(s)
     return i
 
 assert(schoom(['12','+6','-4','+5','+2'])==21)
@@ -101,7 +101,7 @@ assert(liftor("-22x=44")==-2)
 assert(liftor("-22x=-44")==2)
 assert(liftor('x=6')==6)
 assert(liftor('-6=-x')==6)
-
+assert(liftor('0.5=x')==0.5)
 #while True :
 #    mish =input("Give the equation \n")
 #    print("x=",liftor(mish))

@@ -6,18 +6,18 @@ win = tk.Tk()
 c= tk.Canvas(win,height=100,width=100)
 
 btn= tk.StringVar()
-
+E = tk.Entry(win)
 def arbel():
    btn.set("Hello arbel")
-   
-   #B = tk.Button(win, text ="Hello arbel", command = arbel)
-   #B.pack()
-   #c.create_text(50,50,text="Hello arbel")
+   c.create_text(50,50,text=E.get())
 
 B = tk.Button(win, textvariable =btn, command = arbel)
 btn.set("Hello")
+
+
+E.pack()
 B.pack()
 c.pack()
 pass
 tk.mainloop()
-pass  
+
