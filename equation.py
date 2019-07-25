@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import math
 # split the equation to two parts
 # e.g. split("3x+4=5") is ("3x+4","5")
 def split(mish):
@@ -46,6 +46,7 @@ def one_side (in_):
 assert(one_side("5x--5=10")=="5x--5-10")
 assert(one_side("12x+4x=-43+5x")=="12x+4x+43-5x")
 
+
 def do_x (q):
     q=q.replace("+","@+")
     q=q.replace("-","@-")
@@ -56,6 +57,24 @@ def do_x (q):
 
 assert(do_x("12x+4x-43+5x")==['12x','+4x','-43','+5x'])
 assert(do_x('+3+3x')==['+3','+3x'])
+
+
+'''
+להוסיף פונקציות לכפל וחילוק
+כפל:
+'''
+def cefel (anumber):
+ #   global m,mx
+    wm=anumber.split('*')
+    total = 1
+    for num in wm:
+        total = total * float(num.strip())
+    return total                                           
+
+#assert(cefel(('12x*3','+4x','-43','+5x')=='36x','+4x','-43','+5x')
+assert(cefel('-12*3')==-36)
+assert(cefel('1*2*3*1')==6)
+pass
 
 def mehber (imp):
     rx = []
@@ -102,9 +121,11 @@ assert(liftor("-22x=-44")==2)
 assert(liftor('x=6')==6)
 assert(liftor('-6=-x')==6)
 assert(liftor('0.5=x')==0.5)
+
 #while True :
 #    mish =input("Give the equation \n")
 #    print("x=",liftor(mish))
+
 
 
 win = tk.Tk()
