@@ -110,6 +110,7 @@ def liftor(mish):
     r=do_x(r)
     meaohd=l+r
     x,nox=mehber(meaohd)
+    
     x=schoom (x)
     nox=schoom (nox)
     return nox/-x
