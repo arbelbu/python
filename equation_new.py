@@ -1,12 +1,22 @@
-
-import tkinter
+import re
+import tkinter as tk
 
 def split(mish):
     part=mish.partition("=")
-    return (part[0].strip(),part[2].strip())
+    a=re.sub(r"((?:\d+))((x)|\()", r"\1*\2", str(part[0]))
+    b=re.sub(r"((?:\d+))((x)|\()", r"\1*\2", str(part[2]))
+    print (b)
+    return (a.strip(),b.strip())
+assert(split("a=3") == ("a","3"))
+assert(split("3x+4=5") == ("3*x+4","5"))
+assert(split("5=3x+4") == ("5","3*x+4"))
+assert(split("5 = 3x+4") == ("5","3*x+4"))
+assert(split(" 5 = 3x+4 ") == ("5","3*x+4"))
+pass
 def negate(input):
     a=input.strip()
     a="-("+a+")"
+    
     return a
 #assert(negate("x") == "-x")
 assert(negate("-x") == "-(-x)")
@@ -37,7 +47,7 @@ def mekadmim(trgil):
 
 assert (mekadem_hofshi("40+5-5*7")==10)
 assert (mekadem_hofshi("40+5-5*7*x")==45)
-print(mekadmim("40+5-5*7*x"))
+#print(mekadmim("40+5-5*7*x"))
 
 
 
@@ -60,9 +70,32 @@ assert(liftor('0.5=x')==0.5)
 t = "3*x+12=3-2*x"
 x = liftor(t)
 s = t.partition("=")
-print("left :", eval(s[0]))
-print("right :", eval(s[2]))
+#print("left :", eval(s[0]))
+#print("right :", eval(s[2]))
 
-t = "3x+12=3-2x+324x-2(x+3)"
-import re
+t = "3+12=3-2+324-2*(6+3)"
+
 print (re.sub(r"((?:\d+))((x)|\()", r"\1*\2", t))
+pass
+
+
+win = tk.Tk()
+c= tk.Canvas(win,height=200,width=200)
+c.create_text(100,10,text="Give the equation")
+
+E = tk.Entry(win)
+id = 5000
+def graft():    
+    mish=E.get()
+    stri=str(liftor(mish))
+    
+    c.delete("tag_")
+    c.create_text(100,100,text=('x=',stri),tag="tag_")
+
+B= tk.Button(win,text='solve', command = graft)
+
+E.pack()
+c.pack()
+B.pack()
+
+tk.mainloop()
