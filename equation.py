@@ -64,16 +64,30 @@ assert(do_x('+3+3x')==['+3','+3x'])
 כפל:
 '''
 def cefel (anumber):
- #   global m,mx
-    wm=anumber.split('*')
-    total = 1
-    for num in wm:
-        total = total * float(num.strip())
-    return total                                           
+    print(anumber)
+    m=[]
+    for a in anumber:
+        a = a.replace('x', '')
+        if a in ['','+','-'] :
+            m+=[a+'1']
+            break
+        wm=a.split('*')
+        total = 1
+        for num in wm:
+            total = total * float(num.strip())
+        m+=[str(total)]
+    return m                                           
 
-#assert(cefel(('12x*3','+4x','-43','+5x')=='36x','+4x','-43','+5x')
-assert(cefel('-12*3')==-36)
-assert(cefel('1*2*3*1')==6)
+#assert(cefel(['12x*3','+4x','-5x']==['36.0','+4.0','-5.0'])
+#print(cefel(['-12*3','12*1']))
+
+assert(cefel(['-12*3','12*1'])==['-36.0','12.0'])
+#assert(cefel(['-12*3x','12x*1'])==['-36.0','12.0'])
+assert(cefel(['1*2*3'])==['6.0'])
+assert(cefel(['-1*2*3'])==['-6.0'])
+assert(cefel(['-1*-2*3'])==['6.0'])
+assert(cefel(['-1*-2*-3'])==['-6.0'])
+assert(cefel(['1*2*3*1'])==['6.0'])
 pass
 
 def mehber (imp):
@@ -110,7 +124,8 @@ def liftor(mish):
     r=do_x(r)
     meaohd=l+r
     x,nox=mehber(meaohd)
-    
+    x=cefel(x)
+    nox=cefel(nox)
     x=schoom (x)
     nox=schoom (nox)
     return nox/-x

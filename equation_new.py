@@ -1,5 +1,6 @@
 import re
 import tkinter as tk
+import math
 
 def split(mish):
     part=mish.partition("=")
@@ -7,25 +8,12 @@ def split(mish):
     b=re.sub(r"((?:\d+))((x)|\()", r"\1*\2", str(part[2]))
     print (b)
     return (a.strip(),b.strip())
-assert(split("a=3") == ("a","3"))
-assert(split("3x+4=5") == ("3*x+4","5"))
-assert(split("5=3x+4") == ("5","3*x+4"))
-assert(split("5 = 3x+4") == ("5","3*x+4"))
-assert(split(" 5 = 3x+4 ") == ("5","3*x+4"))
-pass
+
 def negate(input):
     a=input.strip()
     a="-("+a+")"
-    
     return a
-#assert(negate("x") == "-x")
-assert(negate("-x") == "-(-x)")
-assert(negate(" x ") == "-(x)")
-assert(negate("3") == "-(3)")
-assert(negate("-3") == "-(-3)")
-#assert(negate("2x+6") == "-2x-6")
-#assert(negate("-7x+6") == "+7x-6")
-#assert(negate("5+7-3x+3x") == "-5-7+3x-3x")
+
 def one_side (in_):
     part = split(in_)
     minos=negate(part[1])
@@ -35,21 +23,25 @@ def one_side (in_):
 
 
 def mekadem_hofshi(trgil):
-    x=0
+    x=0.0
     p=eval(trgil)
     return p
-def mekadmim(trgil):
-    m=mekadem_hofshi(trgil)
-    trgil+="-("+str(m)+")"
+def mekadmim(trgl):
+    c=mekadem_hofshi(trgl)
+    trgl+="-("+str(c)+")"
     x=1
-    m_x=eval(trgil)
-    return (m, m_x) 
-
+    n=eval(trgl)
+    x=2
+    m=eval(trgl)
+    a=eval('(m-2*n)/2')
+    b=eval('n-a')
+    return (a,b,c) 
+#להוסיף בפונקציה אפשרות למשוואה ריבועית (a) ככתוב בדףשמאחורי המסך< 
 assert (mekadem_hofshi("40+5-5*7")==10)
 assert (mekadem_hofshi("40+5-5*7*x")==45)
-#print(mekadmim("40+5-5*7*x"))
-
-
+assert (mekadmim("3*x**2+4*x+5")==(3,4,5))
+#assert (mekadmim("2x**2+2x+4")==28)
+pass
 
 def liftor(mish):
     l,r=split(mish)
@@ -67,18 +59,14 @@ assert(liftor('x=6')==6)
 assert(liftor('-6=-x')==6)
 assert(liftor('0.5=x')==0.5)
 
-t = "3*x+12=3-2*x"
-x = liftor(t)
-s = t.partition("=")
+#t = "3*x+12=3-2*x"
+#x = liftor(t)
+#s = t.partition("=")
 #print("left :", eval(s[0]))
 #print("right :", eval(s[2]))
 
 t = "3+12=3-2+324-2*(6+3)"
-
-print (re.sub(r"((?:\d+))((x)|\()", r"\1*\2", t))
-pass
-
-
+#
 win = tk.Tk()
 c= tk.Canvas(win,height=200,width=200)
 c.create_text(100,10,text="Give the equation")

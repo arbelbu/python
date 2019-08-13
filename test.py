@@ -3,7 +3,7 @@ import time
 
 
 win = tk.Tk()
-c= tk.Canvas(win,height=100,width=100)
+c= tk.Canvas(win,height=1000,width=1000)
 
 btn= tk.StringVar()
 E = tk.Entry(win)
