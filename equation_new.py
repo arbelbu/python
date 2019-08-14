@@ -22,42 +22,51 @@ def one_side (in_):
     return in_
 
 
-def mekadem_hofshi(trgil):
+def mekadmim(trgil):
     x=0.0
-    p=eval(trgil)
-    return p
-def mekadmim(trgl):
-    c=mekadem_hofshi(trgl)
-    trgl+="-("+str(c)+")"
-    x=1
-    n=eval(trgl)
-    x=2
-    m=eval(trgl)
+    c=eval(trgil)
+    trgil+="-("+str(c)+")"
+    x=1.0
+    n=eval(trgil)
+    x=2.0
+    m=eval(trgil)
     a=eval('(m-2*n)/2')
     b=eval('n-a')
     return (a,b,c) 
 #להוסיף בפונקציה אפשרות למשוואה ריבועית (a) ככתוב בדףשמאחורי המסך< 
-assert (mekadem_hofshi("40+5-5*7")==10)
-assert (mekadem_hofshi("40+5-5*7*x")==45)
+
 assert (mekadmim("3*x**2+4*x+5")==(3,4,5))
 #assert (mekadmim("2x**2+2x+4")==28)
 pass
 
+def liftor_ribooiot (a,b,c):
+    if a==0:
+        try:
+            return [-c/b]
+        except ZeroDivisionError :
+            return []
+    try:
+        x1=(-b+math.sqrt(b*b-4*a*c))/(2*a)
+        x2=(-b-math.sqrt(b*b-4*a*c))/(2*a)
+        return [x1,x2]
+    except ValueError:
+        return []
+assert(liftor_ribooiot(0,0,2) == [])
 def liftor(mish):
     l,r=split(mish)
     r=negate(r)
     meaohd=l+r
-    nox, x = mekadmim(meaohd)
-    return nox/-x
+    a,b,c = mekadmim(meaohd)
+    return liftor_ribooiot(a,b,c)
 
 
-assert(liftor("3*x+3=-3-3*x") == -1.0)
-assert(liftor("22*x=44")==2)
-assert(liftor("-22*x=44")==-2)
-assert(liftor("-22*x=-44")==2)
-assert(liftor('x=6')==6)
-assert(liftor('-6=-x')==6)
-assert(liftor('0.5=x')==0.5)
+assert(liftor("3*x+3=-3-3*x") == [-1.0])
+assert(liftor("22*x=44")==[2])
+assert(liftor("-22*x=44")==[-2])
+assert(liftor("-22*x=-44")==[2])
+assert(liftor('x=6')==[6])
+assert(liftor('-6=-x')==[6])
+assert(liftor('0.5=x')==[0.5])
 
 #t = "3*x+12=3-2*x"
 #x = liftor(t)
@@ -73,12 +82,25 @@ c.create_text(100,10,text="Give the equation")
 
 E = tk.Entry(win)
 id = 5000
+
+
 def graft():    
     mish=E.get()
-    stri=str(liftor(mish))
-    
-    c.delete("tag_")
-    c.create_text(100,100,text=('x=',stri),tag="tag_")
+    r = liftor(mish)
+    c.delete("tag1")
+    c.delete("tag2")
+    if len(r) == 0: 
+        c.create_text(100,100,text=('אין פתרון'),tag="tag1")
+    elif len(r) == 1:
+        str1=str(r[0])
+        c.create_text(100,100,text=('x=',str1),tag="tag1")
+    elif len(r) == 2:
+        str1=str(r[0])
+        str2=str(r[1])
+        c.create_text(100,100,text=('x1=',str1),tag="tag1")
+        c.create_text(100,120,text=('x2=',str2),tag="tag2")
+
+
 
 B= tk.Button(win,text='solve', command = graft)
 
