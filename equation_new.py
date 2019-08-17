@@ -1,12 +1,13 @@
 import re
 import tkinter as tk
 import math
+#import turtle
 
 def split(mish):
     part=mish.partition("=")
     a=re.sub(r"((?:\d+))((x)|\()", r"\1*\2", str(part[0]))
     b=re.sub(r"((?:\d+))((x)|\()", r"\1*\2", str(part[2]))
-    print (b)
+    #print (b)
     return (a.strip(),b.strip())
 
 def negate(input):
@@ -68,6 +69,8 @@ assert(liftor('x=6')==[6])
 assert(liftor('-6=-x')==[6])
 assert(liftor('0.5=x')==[0.5])
 
+
+
 #t = "3*x+12=3-2*x"
 #x = liftor(t)
 #s = t.partition("=")
@@ -77,18 +80,31 @@ assert(liftor('0.5=x')==[0.5])
 t = "3+12=3-2+324-2*(6+3)"
 #
 win = tk.Tk()
+
 c= tk.Canvas(win,height=200,width=200)
-c.create_text(100,10,text="Give the equation")
+
+
+c.create_text(100, 10,anchor="center",text="Give the equation")
+#'''
+
+
+
 
 E = tk.Entry(win)
+#E.pack(side=tk.TOP)
 id = 5000
+E.place(x=40, y=20, in_=win)
+ 
 
-
-def graft():    
+def graft(e = None):    
     mish=E.get()
-    r = liftor(mish)
     c.delete("tag1")
     c.delete("tag2")
+    try:
+        r = liftor(mish)
+    except :
+        c.create_text(100,100,text=('המשוואה שגויה'),tag="tag1")
+        return None
     if len(r) == 0: 
         c.create_text(100,100,text=('אין פתרון'),tag="tag1")
     elif len(r) == 1:
@@ -100,12 +116,9 @@ def graft():
         c.create_text(100,100,text=('x1=',str1),tag="tag1")
         c.create_text(100,120,text=('x2=',str2),tag="tag2")
 
+win.bind("<Return>", graft)
+print ("dd")
 
-
-B= tk.Button(win,text='solve', command = graft)
-
-E.pack()
 c.pack()
-B.pack()
 
 tk.mainloop()
